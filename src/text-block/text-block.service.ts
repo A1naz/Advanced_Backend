@@ -51,6 +51,7 @@ export class TextBlockService {
   async deleteTextBlock(id: string) {
     try {
       const textBlock = await this.textBlockRepository.findByPk(Number(id));
+      await this.fileService.deleteFIle(textBlock.image)
       await textBlock.destroy();
       return textBlock;
     } catch (error) {

@@ -9,6 +9,8 @@ export class FilesService {
     try {
       const fileName = uuid.v4() + '.png';
       const filePath = path.resolve(__dirname, '..', 'static');
+      console.log(filePath);
+
       if (!fs.existsSync(filePath)) {
         fs.mkdirSync(filePath, { recursive: true });
       }
@@ -22,5 +24,12 @@ export class FilesService {
         HttpStatus.INTERNAL_SERVER_ERROR
       );
     }
+  }
+
+  async deleteFIle(name: string) {
+    try {
+      const filePath = path.resolve(__dirname, '..', 'static');
+      fs.unlinkSync(filePath + '/' + name);
+    } catch (err) {}
   }
 }
