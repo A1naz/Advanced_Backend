@@ -7,7 +7,7 @@ interface TBCreationAttributes {
     group: string;
 }
 
-@Table({tableName: 'users', createdAt: false, updatedAt: false})
+@Table({tableName: 'text_block'})
 export class TextBlock extends Model<TextBlock, TBCreationAttributes> {
 
     @Column( {type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true} )

@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import * as path from 'path';
 
 import { User } from './users/users.model';
 import { Person } from './person/person.model';
@@ -34,6 +36,9 @@ import { FilesModule } from './files/files.module';
     AuthModule,
     TextBlockModule,
     FilesModule,
+    ServeStaticModule.forRoot({
+      rootPath: path.resolve(__dirname, 'static'),
+    }),
   ],
 })
 export class appModule {}
