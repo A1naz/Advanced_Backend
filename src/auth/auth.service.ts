@@ -23,8 +23,9 @@ export class AuthService {
 
   async registration(userDto: createUserDto) {
     try {
+      console.log(userDto);
       const candidate = await this.usersService.getUserByEmail(userDto.email);
-
+      
       if (candidate) {
         throw new HttpException(
           'Пользователь с таким email уже существует',
@@ -84,6 +85,17 @@ export class AuthService {
       throw new UnauthorizedException({
         message: 'Некорректный email или пароль',
       });
+    }
+  }
+
+  async deleteUser(user_id: string) {
+    try {
+      await this.personsService.deletePerson(Number(user_id));
+      return await this.usersService.deleteUser(Number(user_id));
+    } catch (err) {
+      console.log(err);
+      throw new HttpException('Пользователь не найден', HttpStatus.BAD_REQUEST);
+      
     }
   }
 }
